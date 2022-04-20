@@ -1,0 +1,22 @@
+<h1>Welcome to the Members Only Project!</h1>
+<br><br><br>
+<% if user_signed_in? %>
+  You're signed in.<br><br>
+  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %><br>
+  <%= link_to "Create Post!", new_post_path %>
+  <% else %>
+  You're not signed in.<br>
+  <%= link_to "Sign In", new_user_session_path %><br>
+  <%= link_to "Sign Up", new_user_registration_path %><br>
+  <% end %>
+  <br><br><br>
+  The list of posts:
+  <br><br>
+  <% @posts.each do |post| %>
+    <% if user_signed_in? %>
+      <strong><%= post.user.email %><br></strong><br>
+    <% else %>
+      <br><br>
+    <% end %>
+    <%= post.body %><br><br><br>
+  <% end %>
